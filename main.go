@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/bdbrwr/bootdev_blogagg/internal/config"
+	_ "github.com/lib/pq"
 )
 
 type state struct {
