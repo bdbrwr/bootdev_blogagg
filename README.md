@@ -1,4 +1,4 @@
-#Boot.Dev Blog Aggregator
+# Boot.Dev Blog Aggregator
 
 This is my repo to keep track fo the guided project of building a Blog Aggregator in Go on boot.dev!
 ---
