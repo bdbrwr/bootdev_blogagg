@@ -18,7 +18,7 @@ func handlerFollow(s *state, cmd command, user database.User) error {
 
 	feed, err := s.db.GetFeedByUrl(context.Background(), url)
 	if err != nil {
-		return err
+		return fmt.Errorf("couldn't get feed: %w", err)
 	}
 
 	ffRow, err := s.db.CreateFeedFollow(context.Background(), database.CreateFeedFollowParams{
@@ -71,7 +71,7 @@ func handlerUnfollow(s *state, cmd command, user database.User) error {
 
 	feed, err := s.db.GetFeedByUrl(context.Background(), url)
 	if err != nil {
-		return err
+		return fmt.Errorf("couldn't get feed: %w", err)
 	}
 
 	err = s.db.RemoveFeedFollow(context.Background(), database.RemoveFeedFollowParams{
@@ -79,8 +79,9 @@ func handlerUnfollow(s *state, cmd command, user database.User) error {
 		FeedID: feed.ID,
 	})
 	if err != nil {
-		return err
+		return fmt.Errorf("couldn't delete feed follow: %w", err)
 	}
 
+	fmt.Printf("%s unfollowed successfully!\n", feed.Name)
 	return nil
 }
