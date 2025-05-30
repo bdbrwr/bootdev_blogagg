@@ -50,3 +50,19 @@ func printFeed(feed database.Feed) {
 	fmt.Printf("* URL:           %s\n", feed.Url)
 	fmt.Printf("* UserID:        %s\n", feed.UserID)
 }
+
+func handlerListFeeds(s *state, cmd command) error {
+	_ = cmd
+
+	items, err := s.db.GetFeeds(context.Background())
+	if err != nil {
+		return fmt.Errorf("couldn't get feeds: %w", err)
+	}
+
+	for _, item := range items {
+		user := item.Name_2.String
+		fmt.Printf("Feed Name: %s, Feed URL: %s, Created By: %s\n", item.Name, item.Url, user)
+	}
+
+	return nil
+}
